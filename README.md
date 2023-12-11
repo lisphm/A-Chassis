@@ -7,5 +7,5 @@
  Latest Stable (GitHub): 
  	https://github.com/lisphm/A-Chassis/releases/tag/v1.6.2.1-stable
   
- Beta (GitHub):
+ Latest Beta (GitHub):
 	https://github.com/lisphm/A-Chassis/releases/tag/v1.6.3-beta.2
