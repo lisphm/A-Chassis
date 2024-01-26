@@ -1,5 +1,5 @@
 # A-Chassis
- The official GitHub page for A-Chassis.
+ Welcome to the official GitHub page for A-Chassis. Here, you will find the beta updates.
 
  ![image](https://github.com/lisphm/A-Chassis/assets/116984726/fb71f6eb-64d4-4692-afe9-42fd7d8489ec)
 
