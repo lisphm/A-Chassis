@@ -8,5 +8,5 @@
  Latest Stable (Roblox):
  	https://create.roblox.com/marketplace/asset/13999609938/
   
-~~Latest Beta (GitHub):~~
-	~~https://github.com/lisphm/A-Chassis/releases/tag/v1.6.3-beta.2~~ _There is not currently a beta version. Please use the latest stable._
+Latest Beta (GitHub):
+	https://github.com/lisphm/A-Chassis/releases/tag/v1.7-beta.1
