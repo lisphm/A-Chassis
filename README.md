@@ -3,10 +3,9 @@
  
  Latest Stable (GitHub): 
  	https://github.com/lisphm/A-Chassis/releases/tag/v1.6.3.4-stable
- ![image](https://github.com/lisphm/A-Chassis/assets/116984726/fb71f6eb-64d4-4692-afe9-42fd7d8489ec)
+ ![A-Chassis 1.6](https://github.com/lisphm/A-Chassis/assets/116984726/fb71f6eb-64d4-4692-afe9-42fd7d8489ec)
 
- Latest Stable (Roblox):
- 	https://create.roblox.com/marketplace/asset/13999609938/
+![Latest Stable (Roblox)](https://badgen.net/#badge/wait/1.6.3.4/green?icon=github)
   
 Latest Beta (GitHub):
 	https://github.com/lisphm/A-Chassis/releases/tag/v1.7-beta.1
