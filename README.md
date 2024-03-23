@@ -18,6 +18,11 @@ A-Chassis is a free, open-source chassis kit on Roblox. It is set to provide a b
 If you would like to contribute to the chassis, or if you need help with the chassis, you can check out [our Discord server](https://discord.gg/P2WXGe3U7E).
 
 # Installation
-Installing A-Chassis is a simple process.
-1. Download the `.rbxm` file from the Releases page. You can find previous versions here as well
+Installing A-Chassis from this page is a simple process.
+1. Download the `.rbxm` file from the [Releases](https://github.com/lisphm/A-Chassis/releases) page. You can find previous versions here as well
 2. Copy the `.rbxm` file into a place in Roblox Studio
+
+You can also install it with Roblox.
+1. Go to the [Roblox version](https://create.roblox.com/store/asset/13999609938) and click `Get Model`
+2. In a Roblox Studio place, open the <img src="https://github.com/lisphm/A-Chassis/assets/116984726/10eaab8a-4970-4dc8-af49-bec5cada7e78" width="14px">
+Toolbox, then go into the <img src="https://github.com/lisphm/A-Chassis/assets/116984726/e57ba175-4357-4a07-893c-a5397a39b062" width="14px">Inventory tab, and find and click the A-Chassis model in the list.
