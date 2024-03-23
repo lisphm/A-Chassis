@@ -12,4 +12,6 @@ A-Chassis is a free, open-source chassis kit on Roblox. It is set to provide a b
 - 🔌Easy-to-use plugin system
 - 💪Extensive user support
 - 🌍Used by hundreds of games
- 
+&nbsp;
+
+If you would like to contribute to the chassis, or if you need help with the chassis, you can check out [our Discord server](https://discord.gg/P2WXGe3U7E).
