@@ -1,10 +1,3 @@
-# Chapters
-[About](#A-Chassis)
-
-[Installation](#Installation)
-
-[Known Issues](#Known-Issues)
-
 # A-Chassis
 Welcome to the official GitHub page for A-Chassis. Here, you will find the beta updates and links to the latest versions.
 
