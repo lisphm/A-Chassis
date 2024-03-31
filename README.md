@@ -28,3 +28,16 @@ You can also install it with the Roblox model.
 Toolbox
 3. Go into the <img src="https://github.com/lisphm/A-Chassis/assets/116984726/e57ba175-4357-4a07-893c-a5397a39b062" width="14px">Inventory tab
 4. Find and click the A-Chassis model to insert it into the place
+
+# Known Issues
+*Solved issues will be marked with **SOLVED** for one update cycle*
+1. Wheels glitch when approaching the car on spawn
+    - Setting network ownership on spawn (Doesn't work)
+    - Disabling tire flex (Doesn't work)
+
+2. Entire car shifts when steering on "New" steering type
+    - Set this to "Old" until fixed (Temporary solution only, not recommended as it uses deprecated components)
+    - RigidityEnabled set to False (Works, but with weak steering at high speed)
+3. Front wheel "F" still flips around on spawn (**Solved**)
+    - Change both Attachment0 and Attachment1 on "F" to Vector.new(0, 180, 0) (Works)
+4. Possible RPM jitter at low RPM
