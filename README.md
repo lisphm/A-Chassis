@@ -1,4 +1,4 @@
-# A-Chassis
+# A-Chassis 🚗
 Welcome to the official GitHub page for A-Chassis. Here, you will find the beta updates and links to the latest versions.
 
 <img alt="A-Chassis 1.6" src="https://github.com/lisphm/A-Chassis/assets/116984726/fb71f6eb-64d4-4692-afe9-42fd7d8489ec" width="400px" align="right">
@@ -17,7 +17,7 @@ A-Chassis is a free, open-source chassis kit on Roblox. It is set to provide a b
 
 If you would like to contribute to the chassis, or if you need help with the chassis, you can check out [our Discord server](https://discord.gg/P2WXGe3U7E).
 
-# Installation
+# Installation 📦
 Installing A-Chassis from this page is a simple process.
 1. Download the `.rbxm` file from the [Releases](https://github.com/lisphm/A-Chassis/releases) page. You can find previous versions here as well
 2. Copy the `.rbxm` file into a place in Roblox Studio
@@ -29,15 +29,15 @@ Toolbox
 3. Go into the <img src="https://github.com/lisphm/A-Chassis/assets/116984726/e57ba175-4357-4a07-893c-a5397a39b062" width="14px">Inventory tab
 4. Find and click the A-Chassis model to insert it into the place
 
-# Known Issues
+# Known Issues 🪧
 *Solved issues will be marked with **SOLVED** for one update cycle*
-1. Wheels glitch when approaching the car on spawn
-    - Setting network ownership on spawn (Doesn't work)
-    - Disabling tire flex (Doesn't work)
+1. Wheels glitch when approaching the car on spawn ❌
+    - Setting network ownership on spawn _(Doesn't work)_
+    - Disabling tire flex _(Doesn't work)_
 
-2. Entire car shifts when steering on "New" steering type
-    - Set this to "Old" until fixed (Temporary solution only, not recommended as it uses deprecated components)
-    - RigidityEnabled set to False (Works, but with weak steering at high speed)
-3. Front wheel "F" still flips around on spawn (**Solved**)
-    - Change both Attachment0 and Attachment1 on "F" to Vector.new(0, 180, 0) (Works)
-4. Possible RPM jitter at low RPM
+2. Entire car shifts when steering on "New" steering type ❌
+    - Set this to "Old" until fixed _(Temporary solution only, not recommended as it uses deprecated components)_
+    - RigidityEnabled set to False _(Works, but with weak steering at high speed)_
+3. Front wheel "F" still flips around on spawn **(Solved)** ✔️
+    - Change both `Attachment0` and `Attachment1` on "F" to `Vector.new(0, 180, 0)` _(Works)_
+4. Possible RPM jitter at low RPM ⚠️
