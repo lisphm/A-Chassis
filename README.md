@@ -38,6 +38,5 @@ Toolbox
 2. Entire car shifts when steering on "New" steering type ❌
     - Set this to "Old" until fixed _(Temporary solution only, not recommended as it uses deprecated components)_
     - RigidityEnabled set to False _(Works, but with weak steering at high speed)_
-3. Front wheel "F" still flips around on spawn **(Solved)** ✔️
-    - Change both `Attachment0` and `Attachment1` on "F" to `Vector.new(0, 180, 0)` _(Works)_
-4. Possible RPM jitter at low RPM ⚠️
+    
+3. Possible RPM jitter at low RPM ⚠️
