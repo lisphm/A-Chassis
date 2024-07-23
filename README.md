@@ -4,7 +4,7 @@ Welcome to the official GitHub page for A-Chassis. Here, you will find the beta 
 <img alt="A-Chassis 1.6" src="https://github.com/lisphm/A-Chassis/assets/116984726/fb71f6eb-64d4-4692-afe9-42fd7d8489ec" width="400px" align="right">
 
 [![Roblox Stable](https://badgen.net/badge/Roblox%20Stable/1.6.4/blue?icon=https://upload.wikimedia.org/wikipedia/commons/6/6c/Roblox_Logo.svg)](https://create.roblox.com/store/asset/13999609938)
-[![GitHub Stable](https://badgen.net/badge/GitHub%20Stable/1.6.3.5/blue?icon=github)](https://github.com/lisphm/A-Chassis/releases/tag/v1.6.3.5-stable)
+[![GitHub Stable](https://badgen.net/badge/GitHub%20Stable/1.6.4/blue?icon=github)](https://github.com/lisphm/A-Chassis/releases/tag/v1.6.4-stable)
 [![GitHub Beta](https://badgen.net/badge/GitHub%20Beta/1.7%20Beta%204/purple?icon=github)](https://github.com/lisphm/A-Chassis/releases/tag/v1.7-beta.4)
  
 A-Chassis is a free, open-source chassis kit on Roblox. It is set to provide a beginner-friendly, yet scalable starting point for those who want to experiment with automobiles.
