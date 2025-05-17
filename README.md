@@ -40,3 +40,4 @@ Toolbox
     - RigidityEnabled set to False _(Works, but with weak steering at high speed)_
     
 3. Possible RPM jitter at low RPM ⚠️
+4. Bike animation breaks layered clothing
