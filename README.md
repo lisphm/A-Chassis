@@ -31,13 +31,7 @@ Toolbox
 
 # Known Issues 🪧
 *Solved issues will be marked with **SOLVED** for one update cycle*
-1. Wheels glitch when approaching the car on spawn ❌
-    - Setting network ownership on spawn _(Doesn't work)_
-    - Disabling tire flex _(Doesn't work)_
-
-2. Entire car shifts when steering on "New" steering type ❌
+1. Entire car shifts when steering on "New" steering type ❌
     - Set this to "Old" until fixed _(Temporary solution only, not recommended as it uses deprecated components)_
     - RigidityEnabled set to False _(Works, but with weak steering at high speed)_
-    
-3. Possible RPM jitter at low RPM ⚠️
-4. Bike animation breaks layered clothing
+2. Bike animation breaks layered clothing
