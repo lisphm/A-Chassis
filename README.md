@@ -32,6 +32,4 @@ Toolbox
 # Known Issues 🪧
 *Solved issues will be marked with **SOLVED** for one update cycle*
 1. Entire car shifts when steering on "New" steering type ❌
-    - Set this to "Old" until fixed _(Temporary solution only, not recommended as it uses deprecated components)_
-    - RigidityEnabled set to False _(Works, but with weak steering at high speed)_
 2. Bike animation breaks layered clothing
