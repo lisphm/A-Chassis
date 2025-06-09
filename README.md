@@ -31,5 +31,5 @@ Toolbox
 
 # Known Issues 🪧
 *Solved issues will be marked with **SOLVED** for one update cycle*
-1. Entire car shifts when steering on "New" steering type ❌
+1. Entire car shifts when steering on "New" steering type
 2. Bike animation breaks layered clothing
