@@ -5,22 +5,22 @@
 	   / /\ \______| |    | '_ \ / _` / __/ __| / __|
 	  / ____ \     | |____| | | | (_| \__ \__ \ \__ \
 	 /_/    \_\     \_____|_| |_|\__,_|___/___/_|___/
-	 	Version 1.7
+	 Version 1.7
 --]]
 
 local Tune = {}
 
 --[[Misc]]
-	Tune.LoadDelay		= 2			    -- Delay before initializing chassis (in seconds)
+	Tune.LoadDelay		= 3			    -- Delay before initializing chassis (in seconds)
 	Tune.AutoStart		= true		    -- Set to false if using manual ignition plugin
-	Tune.AutoFlip		= false		    -- Set to false if using manual flip plugin
+	Tune.AutoFlip		= true		    -- Set to false if using manual flip plugin
 	Tune.Mobile			= true			-- Set to false if using a 3rd party mobile support method.
 	Tune.FlipType		= "New"			-- "New" uses AlignOrientation, "Old" uses BodyGyro. This really only needs to be changed for plugin compatibility.
 
 --[[Wheel Alignment]]
 	--[Values are in degrees]
-	Tune.FCamber		= -0.2
-	Tune.RCamber		= -0.5
+	Tune.FCamber		= -0.6
+	Tune.RCamber		= -0.9
 	Tune.FCaster		= 4
 	Tune.RCaster		= 0
 	Tune.FToe			= 0
@@ -50,9 +50,9 @@ local Tune = {}
 	Tune.SuspensionEnabled	= true	-- Enables suspension, true or false
 	
 	--Front Strut
-	Tune.FSusStiffness	= 16.6		-- Spring Force in kgf/mm. (1 kgf/mm = 447.18324 Roblox Units in the default scaling. You can divide your Roblox stiffness by this value.)
-	Tune.FSusDamping	= 3.6		-- Spring Damping in thousands of kg/s. (1 kg/s = 0.0456 Roblox Units in the default scaling. You can divide your Roblox damping by this value.)
-	Tune.FSwayBar		= 3.8		-- Sway Bar Force in kgf/mm (more = less roll)
+	Tune.FSusStiffness	= 12.3		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
+	Tune.FSusDamping	= 3.9		-- Spring Damping in thousands of kg/s. (To convert from Roblox damping, divide Roblox damping by 45.6)
+	Tune.FSwayBar		= 3.2		-- Sway Bar Force in kgf/mm (more = less roll)
 
 	Tune.FSusLength		= 1.2		-- Base spring height (in studs)
 	Tune.FPreCompress	= .2		-- Adds to base spring height (in studs)
@@ -60,9 +60,9 @@ local Tune = {}
 	Tune.FCompressLim	= .3		-- Max Compression Travel (in studs)
 
 	--Rear Strut
-	Tune.RSusStiffness	= 20.3		-- Spring Force in kgf/mm. (1 kgf/mm = 447.18324 Roblox Units in the default scaling. You can divide your Roblox stiffness by this value.)
-	Tune.RSusDamping	= 4.2		-- Spring Damping in thousands of kg/s. (1 kg/s = 0.0456 Roblox Units in the default scaling. You can divide your Roblox damping by this value.)
-	Tune.RSwayBar		= 3.2		-- Sway Bar Force in kgf/mm (more = less roll)
+	Tune.RSusStiffness	= 13.2		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
+	Tune.RSusDamping	= 4.4 		-- Spring Damping in thousands of kg/s. (To convert from Roblox damping, divide Roblox damping by 45.6)
+	Tune.RSwayBar		= 1.1		-- Sway Bar Force in kgf/mm (more = less roll)
 	
 	Tune.RSusLength		= 1.2		-- Base spring height (in studs)
 	Tune.RPreCompress	= .2		-- Adds to base spring height (in studs)
@@ -78,7 +78,7 @@ local Tune = {}
 		--[[Vertical]]		-.5		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 	Tune.FSpringOffset	= {			-- Suspension anchor point offset (relative to ABOVE anchor offset) (Avxnturador)
-		--[[Lateral]]		0		,	-- positive = outward 
+		--[[Lateral]]		-.4		,	-- positive = outward 
 		--[[Vertical]]		0		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 
@@ -90,7 +90,7 @@ local Tune = {}
 		--[[Vertical]]		-.5		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 	Tune.RSpringOffset	= {			-- Suspension anchor point offset (relative to ABOVE anchor offset) (Avxnturador)
-		--[[Lateral]]		0		,	-- positive = outward 
+		--[[Lateral]]		-.4		,	-- positive = outward 
 		--[[Vertical]]		0		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 
@@ -124,9 +124,9 @@ local Tune = {}
 	
 	-- Steer Decay
 	Tune.SteerDecay			= 260		-- Speed of gradient cutoff (in km/h)
-	Tune.SteerSpeedDecay	= 240		-- Speed of gradient cutoff of steering speed (in km/h)
-	Tune.MinSteer			= 20		-- Minimum steering angle at max steer decay (in percent)
-	Tune.MinSteerSpeed		= 40		-- Minimum steering speed at max decay (in percent)
+	Tune.SteerSpeedDecay	= 260		-- Speed of gradient cutoff of steering speed (in km/h)
+	Tune.MinSteer			= 25		-- Minimum steering angle at max steer decay (in percent)
+	Tune.MinSteerSpeed		= 60		-- Minimum steering speed at max decay (in percent)
 	Tune.MSteerExp			= 1			-- Mouse steering exponential degree
 	
 	-- Counter-steer
@@ -147,8 +147,8 @@ local Tune = {}
 	Tune.RSteerMaxTorque		= 20000		-- Rear Steering Force (old only)
 
 	-- Steering aggressiveness
-	Tune.SteerSmoothing		= 2			-- The lower, the smoother the steering will arrive at max angle.
-	Tune.PowerSteeringType	= "New"		-- "New" uses AlignOrientation. This may cause problems.
+	Tune.SteerSmoothing		= 3			-- The lower, the smoother the steering will arrive at max angle.
+	Tune.PowerSteeringType	= "Old"		-- "New" uses AlignOrientation. This may cause problems.
 										-- "Old" uses BodyGyro.
 	Tune.SteerD				= 1000		-- Steering Damping (old only)
 	Tune.SteerP				= 50000		-- Steering Aggressiveness (old only)
@@ -169,8 +169,7 @@ local Tune = {}
 		Tune.PeakTorque				= 209		-- The maximum amount of torque the engine makes in lb-ft.
 		Tune.PeakTorqueRPM			= 4480		-- When the engine reaches PeakTorque in RPM.
 
-		Tune.IdleRPM				= 1800		-- The engine's desired idle RPM. IdleDamping may change this.
-		Tune.IdleDamping			= 4800		-- Damping of idle in RPM. This will change that actual idle RPM at higher values.
+		Tune.IdleRPM				= 1000		-- The engine's desired idle RPM. IdleDamping may change this.
 		Tune.IdleTorque				= 148		-- How much torque the engine makes at idle.
 		Tune.IdleTorqueCurve		= 0.5		-- The shape of the torque curve between idle and PeakRPM.
 
@@ -243,7 +242,7 @@ local Tune = {}
 	Tune.BrakeDecel		= .2		-- Brake deceleration, applied per tick
 
 	-- Engine speed 
-	Tune.RevBounce		= 100		-- RPM kickback from redline
+	Tune.RevBounce		= 200		-- RPM kickback from redline
 	Tune.OverRev		= false		-- Set to true to allow the RPM to go above redline
 	
 	Tune.RevAccel		= 180		-- RPM acceleration when clutch is on (this should be higher than RevDecay and RevDecayRPM)
@@ -254,22 +253,24 @@ local Tune = {}
 	Tune.DumpMult		= 1.0		-- Flywheel energy multiplier when dumping the clutch (keep at 1.0 for the best result).
 	
 	Tune.IdleThrottle	= 5			-- Percent throttle with no input. (in percent)
+	Tune.IdleDamping	= 4800		-- Damping of idle in RPM. This will change that actual idle RPM at higher values.
+	Tune.IdlePadding	= 800		-- Added on top of IdleRPM to account for IdleDamping
 	Tune.RemoveCreep	= true		-- Tries to remove the natural creep of the chassis by applying clutch if there is no input throttle and if the RPM is below idle.
 	
 	Tune.InclineComp	= 1.0	    -- Torque compensation multiplier for inclines (applies gradient from 0-90 degrees)
 	
 --[[Drivetrain]]	
 	Tune.Config			= "AWD"		-- "FWD" , "RWD" , "AWD"
-	Tune.TorqueVector	= .3			-- AWD ONLY, "-1" has a 100% front bias, "0" has a 50:50 bias, and "1" has a 100% rear bias. Can be any number between that range.
+	Tune.TorqueVector	= .2			-- AWD ONLY, "-1" has a 100% front bias, "0" has a 50:50 bias, and "1" has a 100% rear bias. Can be any number between that range.
 
 	-- Options for a limited slip differential (LuaInt)
 	-- *You can set all of these values to 0 to achieve an open differential.
 	Tune.FDiffPower		= 20		-- 0 - 100				Higher values yield more wheel lock-up under throttle, more stability (Front wheels, only if driven)
-	Tune.FDiffCoast		= 20		-- 0 - 100				Higher values yield more wheel lock-up when off throttle, more stability (Front wheels, only if driven)
-	Tune.FDiffPreload	= 20		-- 0 - 100				Higher values will make the wheels generally lock up faster in any environment (Front wheels, only if driven)
+	Tune.FDiffCoast		= 60		-- 0 - 100				Higher values yield more wheel lock-up when off throttle, more stability (Front wheels, only if driven)
+	Tune.FDiffPreload	= 40		-- 0 - 100				Higher values will make the wheels generally lock up faster in any environment (Front wheels, only if driven)
 	Tune.RDiffPower		= 20		-- 0 - 100				(Rear wheels, only if driven)
-	Tune.RDiffCoast		= 20		-- 0 - 100				(Rear wheels, only if driven)
-	Tune.RDiffPreload	= 20		-- 0 - 100				(Rear wheels, only if driven)
+	Tune.RDiffCoast		= 60		-- 0 - 100				(Rear wheels, only if driven)
+	Tune.RDiffPreload	= 40		-- 0 - 100				(Rear wheels, only if driven)
 
 	-- Traction Control Settings
 	Tune.TCSEnabled		= true		-- Implements TCS
@@ -360,6 +361,7 @@ local Tune = {}
 	--You can tune the gears in the engine graphs by switching G_TunerType inside Desmos
 	Tune.FinalDrive		= 3.621
 	Tune.Ratios			= {
+		--[[Park]]		--0			, --"0" enables the parking gear, "--0" disables.
 		--[[Reverse]]	3.18		,
 		--[[Neutral]]	0			,
 		--[[ 1 ]]		3.927		,
@@ -368,15 +370,13 @@ local Tune = {}
 		--[[ 4 ]]		1.413		,
 		--[[ 5 ]]		1.101		,
 		--[[ 6 ]]		0.893		,
-		--[[ 7 ]]		0.781		,
-		--[[ 8 ]]		0.698		,
 	}
 
 	Tune.FDMult			= 1			-- Ratio multiplier (keep this at 1 if car is not struggling with torque)
 
 	-- Speed Limiter
 	Tune.SpeedLimit 	= 0	 		-- Maximum speed limit in km/h (0 or less for no limiter)
-	Tune.ReverseSpeed	= 100		-- Maximum reverse speed limit
+	Tune.ReverseSpeed	= 40		-- Maximum reverse speed limit
 	Tune.SLimitGradient	= 2			-- Throttle and brake interpolation
 	Tune.SLimitBrake	= true		-- If true, this will apply the brake if the car is moving too quickly.
 
