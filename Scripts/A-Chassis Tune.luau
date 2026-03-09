@@ -349,6 +349,9 @@ local Tune = {}
 	Tune.AutoUpThresh	= -200		-- Automatic upshift point 	(relative to peak RPM, positive = Over-rev)
 	Tune.AutoDownThresh = 1400		-- Automatic downshift point (relative to peak RPM, positive = Under-rev)
 
+	--Automatic: Auto Hold Brake for Reverse
+	Tune.AutoHoldBrakeForReverse = false    -- Hold brake at a stop to enter reverse and back up without shifting down
+
 	--Automatic: Revmatching
 	Tune.ShiftThrot		= 100		-- Throttle level when shifting down to revmatch, 0 - 100%
 

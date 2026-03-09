@@ -150,6 +150,7 @@ script.Parent:WaitForChild("Values")
 
 	local _Center = CFrame.new()
 	local autoshiftvers = _Tune.AutoShiftVers
+	local autoHoldBrakeForReverse = _Tune.AutoHoldBrakeForReverse == true
 	
 	local FWheelCount = 0
 	local RWheelCount = 0
@@ -660,33 +661,49 @@ task.wait()
 --Automatic Transmission
 function Auto()
 	local maxSpin=0
-	for i,v in Drive do if _WheelSpeeds[v.Name]>maxSpin then maxSpin = _WheelSpeeds[v.Name] end end
+	for i,v in Drive do
+		if _WheelSpeeds[v.Name] > maxSpin then
+			maxSpin = _WheelSpeeds[v.Name]
+		end
+	end
+
 	if _IsOn then
-		if _Tune.AutoShiftVers == "Old" and _CGear == 0 then _CGear = 1 _ClPressing = false end
+		if _Tune.AutoShiftVers == "Old" and _CGear == 0 then
+			_CGear = 1
+			_ClPressing = false
+		end
+
 		if _CGear >= 1 then
-			if (_CGear==1 and _InBrake > 0 and car.DriveSeat.AssemblyLinearVelocity.Magnitude < 5) and _Tune.AutoShiftVers == "Old" then
-				_CGear = -1 _ClPressing = false
+			if autoHoldBrakeForReverse and _InBrake > 0 and car.DriveSeat.AssemblyLinearVelocity.Magnitude < 5 then
+				_CGear = -1
+				_ClPressing = false
+
+			elseif (_CGear == 1 and _InBrake > 0 and car.DriveSeat.AssemblyLinearVelocity.Magnitude < 5) and _Tune.AutoShiftVers == "Old" then
+				_CGear = -1
+				_ClPressing = false
+
 			elseif car.DriveSeat.AssemblyLinearVelocity.Magnitude > 5 and _Tune.ClutchType ~= "CVT" then
 				if _Tune.AutoShiftMode == "RPM" then
-					if _RPM>(_Tune.ShiftRPM+_Tune.AutoUpThresh) then
+					if _RPM > (_Tune.ShiftRPM + _Tune.AutoUpThresh) then
 						if not _ShiftUp and not _Shifting then _ShiftUp = true end
-					elseif math.max(math.min(maxSpin*_Tune.Ratios[_CGear+1]*fFDr,_Tune.Redline+100),0)<(_Tune.ShiftRPM-_Tune.AutoDownThresh) and _CGear>1 then
-						if not _ShiftDn and not _Shifting then _ShiftDn = true end 
+					elseif math.max(math.min(maxSpin * _Tune.Ratios[_CGear+1] * fFDr, _Tune.Redline + 100), 0) < (_Tune.ShiftRPM - _Tune.AutoDownThresh) and _CGear > 1 then
+						if not _ShiftDn and not _Shifting then _ShiftDn = true end
 					end
 				else
-					if car.DriveSeat.AssemblyLinearVelocity.Magnitude > math.ceil(wDRatio*(_Tune.ShiftRPM+_Tune.AutoUpThresh)/_CurrentRatio/fFD) then
+					if car.DriveSeat.AssemblyLinearVelocity.Magnitude > math.ceil(wDRatio * (_Tune.ShiftRPM + _Tune.AutoUpThresh) / _CurrentRatio / fFD) then
 						if not _ShiftUp and not _Shifting then _ShiftUp = true end
-					elseif car.DriveSeat.AssemblyLinearVelocity.Magnitude < math.ceil(wDRatio*(_Tune.ShiftRPM-_Tune.AutoDownThresh)/_Tune.Ratios[_CGear+1]/fFD) and _CGear>1 then
+					elseif car.DriveSeat.AssemblyLinearVelocity.Magnitude < math.ceil(wDRatio * (_Tune.ShiftRPM - _Tune.AutoDownThresh) / _Tune.Ratios[_CGear+1] / fFD) and _CGear > 1 then
 						if not _ShiftDn and not _Shifting then _ShiftDn = true end
 					end
 				end
 			end
 		else
-			if (_InThrot > 0 and car.DriveSeat.AssemblyLinearVelocity.Magnitude < 5) and _Tune.AutoShiftVers == "Old" then
-				_CGear = 1 _ClPressing = false
+			if _InThrot > 0 and car.DriveSeat.AssemblyLinearVelocity.Magnitude < 5 then
+				_CGear = 1
+				_ClPressing = false
 			end
 		end
-	end 
+	end
 end
 
 function Gear()
@@ -779,14 +796,14 @@ function Engine(dt)
 	elseif _Shifting and _ShiftDn then
 		_GThrot = _Tune.ShiftThrot/100
 	else
-		if (_Tune.AutoShiftVers == "Old" and _CGear==-1 and _TMode=="Auto") then
+		if (((_Tune.AutoShiftVers == "Old") or autoHoldBrakeForReverse) and _CGear == -1 and _TMode == "Auto") then
 			_GThrot = _InBrake
 		else
 			_GThrot = math.max(_InThrot, _Tune.IdleThrottle/100)
 		end
 	end
 
-	if (_Tune.AutoShiftVers == "Old" and _CGear==-1 and _TMode=="Auto") then
+	if (((_Tune.AutoShiftVers == "Old") or autoHoldBrakeForReverse) and _CGear == -1 and _TMode == "Auto") then
 		_GBrake = _InThrot
 	else
 		_GBrake = _InBrake
