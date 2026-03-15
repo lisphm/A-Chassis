@@ -19,7 +19,7 @@
 		- TUR is the turbocharger
 	Each sound also includes a "SoundParent" attribute located at the bottom of the properties tab.
 	The value of this attribute is the name of the part that the sound is parented to.
-	You can change the location of said part in the Sounds plugin script, with the "DIRECTORY" value.
+	You can change the location of said part in the value named "Directory" under this script.
 	
 	In the properties tab of each sound, there are also attributes at the bottom of the list.
 	The engine sounds also include equalizer settings.
