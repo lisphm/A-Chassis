@@ -44,7 +44,7 @@ local Tune = {}
  
 	Tune.AxleSize		= 1.5		-- Size of structural members (larger = MORE STABLE / carry more weight)
 	Tune.AxleDensity	= .1		-- Density of structural members
-	Tune.CustomSuspensionDensity	= 0	-- Density of suspension joints, only applies to custom suspension. (0 makes them massless)
+	Tune.CustomSuspensionDensity	= 1	-- Density of suspension joints, only applies to custom suspension. (0 makes them massless)
 
 --[[Suspension]]
 	Tune.SuspensionEnabled	= true	-- Enables suspension, true or false
