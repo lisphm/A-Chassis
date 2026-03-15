@@ -1,186 +1,174 @@
---[[	
-	   ___  _____
-	  / _ |/ ___/	Avxnturador   	| Novena						    midmm5	    |
-	 / __ / /__		LuaInt         	| Novena						    doomcentury	|
-    /_/ |_\___/	 	Detomiks		| Base Chassis
+--[[				    _____ _                   _
+	     	/\         / ____| |                 (_)    
+		   /  \ ______| |    | |__   __ _ ___ ___ _ ___ 
+		  / /\ \______| |    | '_ \ / _` / __/ __| / __|
+		 / ____ \     | |____| | | | (_| \__ \__ \ \__ \
+		/_/    \_\     \_____|_| |_|\__,_|___/___/_|___/
+		Version 1.7.2
 
-	                Version 1.7 (Release Candidate)
-	            	A-Chassis and its plugins, scripts, and assets, is free, open-source software under the GNU GENERAL PUBLIC LICENSE. 
-	            	
-	            	Special thanks to all our beta testers and bug reporters as always!
-	 				 ___________________________________________________________________________
-					|																			|
-					| It is highly recommended to completely re-install A-Chassis from scratch.	|
-					|___________________________________________________________________________|
+		pointclouded		ph.n	    		nathanisalive		a_person730		
+		LuaInt				vanilla01 			au.to.	
+		detocoyote			mischarfess 		s.wick 							
+
+			A-Chassis and its plugins, scripts, and assets, is free, open-source software under the MPL-2.0 License. 
+			
+			Special thanks to all our beta testers and bug reporters as always!
+			 ___________________________________________________________________________
+			|																			|
+			| It is highly recommended to completely re-install A-Chassis from scratch.	|
+			|___________________________________________________________________________|
 	               	
 		*The "A-Chassis Tune" module is where you would want to go to tune the car. Everything you'd need to touch would be there.
 		*However, some tuning values are in the Tires plugin, so please check that out.
-		
+
 		It is possible to import engines from older versions by using the CustomEngine functionality.
 		You can find those details in the default CustomEngine module.
-	            
+		            
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
--- Changelog [MM/DD/YYYY]
--- *Beta changelog will be consolidated for the stable release
-
 -- [Known issues and solutions tested]:
 *Solved issues will be marked with SOLVED for one update cycle
 
-	1. Wheels glitch when approaching the car on spawn.
-		- Setting network ownership to the server on spawn					(Does not work)
-		- Disabling tire flex												(Does not work)
+	1. Entire car shifts when steering on "New" power steering type
+		- Set this to "Old" to fix									
+	
+	2. Tires plugin causes networking and performance impact
+		- Remove and use a third-party plugin to fix
 		
-	2. Entire car shifts when steering on "New" power steering type
-		- Set this to "Old" until fixed										(Temporary solution only)
-		- RigidityEnabled set to false										(Works, but with weak steering at high speed)
-	
-	3. Possible RPM jitter at low RPM (may be due to applying the clutch based on speed)
-	
-	
-	
-[05/24/2024 : A-Chassis, Version 1.7 Release Candidate] - The Coating
-	[Fixes] -Detomiks
-		- RPM management improvements														(Stall setting actually works, no longer glitches when shifting up, over-revving)
-		- Engine graph improvements															(Integrates gear tuning with torque vs. velocity)
-		- Tire temperature improvements														(Cooling is more realistic, clicking the tire UI shows the temperature)
-		- (Car) Revised tire sounds again													(Uses a different, more realistic sound effect)
+-- Changelog [MM/DD/YYYY]
+[03/15/2026 : A-Chassis, Version 1.7.2] - Under The Hood 
+	[Features]
+		- Live Wheel and Steering updates													(Some wheel and steering variables now recalculate during runtime if wheel size or attributes change)
+		- Added SteerDisabled attribute to all wheels										(Allows for individual steering toggles per wheel during runtime)
+		
+	[Fixes]												
+		- Remade the double wishbone suspension and simplified it for beginners learning how it works
+		- Changed CustomSuspensionDensity default to 1 to prevent issues when gravcomp is disabled
+		- CustomSuspensionDensity no longer overwrites pre-set massless parts
+		- Manually destroy the SuspensionGeometry model when custom suspension is disabled to prevent leftovers
+		- Fixed chat input bug where typing would trigger car functions (a roblox update broke this)
+		- Locked update rate to 60Hz to make the math more consistent for people with high FPS
+		- Changed cached value instances into a table to avoid registry limit issues
+		- Moved brake calculations to runtime to allow plugins to change brake values live
+		- Removed redundant VirtualInputEnabled check and unused variables
+		- General code cleanup for better readability
+		
+	[Plugins]
+		- Fixed server-side sounds failing to play for others after exiting and re-entering the car
+		- Updated Tires plugin to reduce errors during vehicle destruction (Special thanks to ProfessorSr)
 
-		- Due to possible model shadowban:													(These components will cause the model to be shadowbanned from the toolbox or removed from Roblox entirely)
-			- Deleted SetValue																
-			- Limited CustomEngine															(Instead of using get/set environment, it now uses a manual list of required variables. You may edit this list to suit your needs, or revert back to the previous get/set enviroment state)
+[06/14/2025 : A-Chassis, Version 1.7.1] - Bug Fixing and Optimization
+	[Features]
+		- Park Gear
+		
+	[Fixes]
+		- Fixed car shutdown																(Initialize would remove the client before it was ready, thank you bacon_ified for inspiring the new removal method)
+		- Plugin and Drive optimizations
+		- Suspension remodel
 
-[04/27/2024 : A-Chassis, Version 1.7 Beta 4] - The Polish
-	[Features] -Detomiks
+[05/23/2025 : A-Chassis, Version 1.7] - The Photo Finish
+	[Features]
+		- (Car) G-Force-based Electronic Stability Control (ESC)							(Only used for stability, not for desired turning radius or steering Gs. This is a lot like Greenville's implementation).
+		- Counter Steer Assist (CS)															(To help steering by AlignOrientation, and just a QOL thing.)
+		- New Sounds plugin																	(The old sounds plugin caused a lot of problems with internet bandwidth, plus it was too complicated.)
+		- New Gauges plugin																	(A lot simpler, basically just modernized AC6C gauges.)
+		- New MSteer Camera (vanilla01)													
+		- Removed deprecated components													
+			- (Optional) Changed Flip to an AlignOrientation instead of BodyGyro				(FOR PLUGINS IN "New" MODE: use Flip.Enabled instead of Flip.MaxForce now)
+			- (Optional) Steering changed to AlignOrientation									(To make this as similar to BodyGyro as possible, we've added countersteer and steer smoothing values.)
+			- (NOT Optional) Using VectorForce instead of the deprecated BodyForce				(It's deprecated... what else is there to say?)
+		- ABS gradient																		(This can possibly help tire slippage when braking.)
+		- Speedlimiter can also apply brake													(This is helpful when going downhill.)
+		- Tires plugin value to change FE rate												(This is helpful for lag.)
+		- CustomEngine module added															(This allows for easy porting of engines. This is a lot like #ENGINE in previous versions. More information is provided in the blank, default one.)
 		- Basic air pressure and altitude support											(Barometric formula is used for engine power loss and aerodynamics)
-		- (Car) Revised tire sounds															(Tire sounds use a different playback speed and the TremoloSoundEffect for a more realistic effect)
-		
-	[Fixes] -Detomiks
-		- AWD split behavior changed														(Only in cases where there are more front wheels than rear wheels, etc. The calculation actually makes sense now)
-		- CollisionGroup support for tire flex												(Previous versions only used the Default collision group and did not support NoCollisionConstraints)
-		- Readded manual steering angle														(Helpful for those who don't want to use the new system. "New" and "Old" renamed to "Auto" and "Manual")
-		- Renamed CarCenter to Center														(Adds continuity between the car and bike chassis)
-		- (Car) SetValue improvements														(Allows plugins to change the drivetrain configuration)
-		- Removed AutoGravComp																(It broke everything)
-		
-		- (Bike) Fixed PhysicalProperties warnings											(I missed this when I did it on the car chassis)
-
-[03/30/2024 : A-Chassis, Version 1.7 Beta 3] - The Clay Bar Beta
-	[Features] -Detomiks
 		- VirtualInput added																(Helpful for mobile support plugins and other things. There is a hard-block inside the Drive script to disable this in case exploits are an issue.)
-		- SetValue added (credit to VanillaEdge)											(Allows for plugins to set internal Drive values. There is a hard-block inside the Drive script to disable this in case exploits are an issue.)
-		- AutoGravComp																		(For legacy plugins)
-	
-	[Fixes] -Detomiks
+
+	[Fixes]
 		- Moved Units to README and Starting to IsOn										(For organization and aesthetic purposes)
+		- Readded manual steering angle														(Helpful for those who don't want to use the new system. "New" and "Old" renamed to "Auto" and "Manual")
+		- CollisionGroup support for tire flex												(Previous versions only used the Default collision group and did not support NoCollisionConstraints)
+		- AWD split behavior changed														(Only in cases where there are more front wheels than rear wheels, etc. The calculation actually makes sense now)
+		- General quality improvements
+		- Fixed an inaccuracy with the Aerodynamics plugin									(It now squares the magnitude of the wind speed instead of each axis).
+		- Renamed S_PeakBoost to just S_Boost												(This is to be friendlier to plugins from 1.5.)
+		- Ignition requires letting go of the ignition before the car begins running 		(It now assumes the car is already on while starting, so you can check if Starting is false and IsOn is true if you want to truly see if the car is running).
+		- Changed clutch dumping mechanic 													(No longer requires holding down the clutch. It now uses the difference between the RPM of the engine and the RPM of the wheels).
+		- Minor update to the turbo lag calculations										(Smoothly interpolates to maximum and minimum boost because I fixed delta-time).
 		- IThrottle and IBrake renamed to InputThrottle and InputBrake respectively			(For aesthetic purposes)
-		- Suspension damping changed from kg/s to thousands of kg/s							(Also for aesthetic purposes)
-		- ClutchIdle renamed to IdleDamping													(This was also broken before, too)
-
-		- Warnings in gauges can be pressed to toggle the warning							(Helpful for mobile support)
-		- Tireflex retuned																	(Can handle high downforce a bit better)
-		- Players correctly revert back to being not massless								(This somehow broke before??)
-		- Smoke effects fixed for some materials											(This includes materials like fabric)
-		- Sound improvements																(Fixed a typo causing throttle distortion to not work, made transmission sounds follow driven wheels instead of all wheels)
-		- Revbounce fixed for non-neutral gears												(Caused by goalMax being redline instead of slightly higher)
-		- Drive optimizations																(WheelOutput no longer contains 5 for-loops like before)
-		- Tires plugin has trail-part behavior changes										(Only changes the part orientation when at speed and when there is tire stress, preventing low-speed physics glitches)
-
-		- (Bike) Fixed wheels not staying at the set transparency							(Don't know how I missed this) 
+		- RPM management improvements														(Stall setting actually works, no longer glitches when shifting up, over-revving, consistent with high and low FPS)
+		- Added back PBrake saving when exiting the car.									(Accidentally removed in 1.6)
+		- Optimizations across the board (vanilla01)
+		- General quality improvements
 		
-[03/23/2024 : A-Chassis, Version 1.7 Beta 2] - A few fine and dandy fixes.
-	[Fixes] -Detomiks, doomcentury
-		- WeldConstraint is used instead of RigidConstraint	(Detomiks)						(RigidConstraint had too many attachments that showed up in the "Show Constraints" toggle.)
-		- Reconfigured controller toggles for UI visibility (Detomiks)						(They interfered with countersteer)
-		- Turbo spooling reworked (Detomiks)												(Old system was unrealistic)
-		- Initialize and Drive optimizations (doomcentury)									
+[06/08/2025 : A-Chassis, Version 1.6.6] - More bugs
+	[Fixes]
+		- Fixed shutdown process (thank you bacon_ifier)
+		- Fixed Sounds causing erros on Server when removing
 
-[02/25/2024 : A-Chassis, Version 1.7 Beta 1] - The first of many.
-	[Features] -Detomiks (These are in order of importance.)
-		- G-Force-based Electronic Stability Control (ESC).									(Only used for stability, not for desired turning radius or steering Gs. This is a lot like Greenville's implementation).
-		- Counter Steer Assist (CS).														(To help steering by AlignOrientation, and just a QOL thing.)
-		- CustomEngine module added.														(This allows for easy porting of engines. This is a lot like #ENGINE in previous versions. More information is provided in the blank, default one.)
-		- New Sounds plugin.																(The old sounds plugin caused a lot of problems with internet bandwidth, plus it was too complicated.)
-		- New Gauges plugin.																(A lot simpler, basically just modernized AC6C gauges.)
-		- Removed deprecated components.													
-			- (Optional) Changed Flip to an AlignOrientation instead of BodyGyro.				(FOR PLUGINS IN "New" MODE: use Flip.Enabled instead of Flip.MaxForce now)
-			- (Optional) Steering changed to AlignOrientation.									(To make this as similar to BodyGyro as possible, we've added countersteer and steer smoothing values.)
-			- (NOT Optional) Using VectorForce instead of the deprecated BodyForce.				(It's deprecated... what else is there to say?)
-		- ABS gradient.																		(This can possibly help tire slippage when braking.)
-		- Speedlimiter can also apply brake.												(This is helpful when going downhill.)
-		- Tires plugin value to change FE rate.												(This is helpful for lag.)
-
-	[Fixes] -Detomiks
-		- Minor update to the turbo lag calculations.										(Smoothly interpolates to maximum and minimum boost because I fixed delta-time).
-		- Changed clutch dumping mechanic. 													(No longer requires holding down the clutch. It now uses the difference between the RPM of the engine and the RPM of the wheels).
-		- Fixed the G-Force plugin underreporting turning forces. 							(For some reason the X-axis was divided by 4.5 instead of 3).
-		- Ignition requires letting go of the ignition before the car begins running. 		(It now assumes the car is already on while starting, so you can check if Starting is false and IsOn is true if you want to truly see if the car is running).
-		- Fixed an inaccuracy with the Aerodynamics plugin.									(It now squares the magnitude of the wind speed instead of each axis).
-		- Fixed RevAccel.																	(It no longer uses the torque of the engine).
-		- Fixed smoke appearing in front of the wheel.										(This was fixed in 1.6, but something happened and it got removed.)
-		- Removed ClutchIdle now that RevDecay is fixed.									(The point of ClutchIdle was to allow the chassis to move when the RPM was below Idle because power was cut off below those RPM's so the car wouldn't move. However, that's kinda just what happens irl anyway so I removed it.)
-			- Consequently, there is now in-built creep which can be disabled with Tune.RemoveCreep		(It's not a bug, it's a feature!)
-		- Renamed S_PeakBoost to just S_Boost.												(This is to be friendlier to plugins from 1.5.)
-		- Initialize with RigidConstraint instead of Weld.									(RigidConstraint will probably be supported for longer and might have more accurate physics than Weld. idk)
-		- Added back PBrake saving when exiting the car.									(I probably accidentally removed this on the transition to 1.6 because 1.5's PBrake on by default was pretty annoying ngl, but it's back now!)
-		- General quality improvements.
-			
-			
-			
----------------------------------------------------------------------------------------------------------------------------------------------------------
--- Previous Versions
+[04/24/2025 : A-Chassis, Version 1.6.5] - Bugfixing and QoL improvements
+	[Fixes] -detocoyote
+		- Added dt resetter to mitigate physics death
+		- Fixed weight calculation
+		- ReturnSpeed calculation fixed
+		- G-Force meter from 1.7 Beta
+		- Tires loop revision
+		
+[07/20/2024 : A-Chassis, Version 1.6.4] - Gauges. Just gauges.
+	[Features] -au.to.
+		- Gauges. They look better.
 
 [02/27/2024 : A-Chassis, Version 1.6.3.4] - A fix from a Roblox update.
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Clamped all density values in Initialize to stop warnings.
 		
 [01/31/2024 : A-Chassis, Version 1.6.3.3] - january moment
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Fixed the turbos dying randomly.
 
 [01/25/2024 : A-Chassis, Version 1.6.3.2] - another little patch
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Changed density of players to 0.01 from 0 in initialize to follow Roblox's buoyancy update.
 		
 [01/20/2024 : A-Chassis, Version 1.6.3.1] - a little patch
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Removed the progressive springs, as the calculations were broken, and this can be easily replicated with a plugin.
 
 [12/17/2023 : A-Chassis, Version 1.6.3] - the moral of the story...
-	[Features] -Detomiks, midmm55
+	[Features] -detocoyote, ph.n
 		- Tires plugin includes optional tire flex and tire weight, and tire marks.
 		- Pressing V hides things like tires, power graphs, G-Force and holding hides everything.
 		- Redid the engine calculations to be more intuitive.
 
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Performance improvements and code optimizations.
 		- Proper body welding.
 		
 [10/08/2023 : A-Chassis, Version 1.6.2.1] - Minor fixing...
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- Removed the camera plugin
 		- Fixed incline compensation
 
 [10/01/2023 : A-Chassis, Version 1.6.2] - little update
-	[Features] -Detomiks
+	[Features] -detocoyote
 		- Added SteerSpeedDecay and MinSteerSpeed to configure the new steer speed settings
 		- Added variable spring rates.
 		
-	[Fixes] -Detomiks
-		- Hinge surface connecting Base to Arm is now a hinge constraint to stop wheels from steering backwards. (Detomiks)
-		- Fixed engine calculations being broken. (Detomiks)
+	[Fixes] -detocoyote
+		- Hinge surface connecting Base to Arm is now a hinge constraint to stop wheels from steering backwards. (detocoyote)
+		- Fixed engine calculations being broken. (detocoyote)
 		- Fixed serious ping issue.
 		- Fixed wheels flippimg around.
 		- Reverted back to unscalable values for performance.
 		* General default tune fixes.
 		
-	[Plugins] -Detomiks, chedsapp
-		- New Camera plugin found by phen/midmm5
-		- Default plugins now have A-Chassis credits. (Detomiks)
+	[Plugins] -detocoyote, chedsapp
+		- New Camera plugin found by phen/ph.n
+		- Default plugins now have A-Chassis credits. (detocoyote)
 		- Aerodynamics uses ApplyImpulseAtPosition. (chedsapp)
-		- Rewrote Controls Module in case controls are added later down the line. (Detomiks)
+		- Rewrote Controls Module in case controls are added later down the line. (detocoyote)
 
 [07/08/2023 : A-Chassis, Version 1.6.1] - A bunch of bugs
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- *Most* 1.5 plugins can be easily ported to 1.6.
 		- Auto/CVT conflicts resolved.
 		- New Gauges look
@@ -190,20 +178,20 @@
 		- Units is relative to length, mass, and force now.
 		
 [07/08/2023 : A-Chassis, Version 1.6.0] - The Modern Era
-	[OVERHAULS] -Detomiks
+	[OVERHAULS] -detocoyote
 		- Completely redid all the engine calculations. Begone terrible horsepower numbers!
 		- Changed scaling chassis-wide using: https://create.roblox.com/docs/physics/units
 		- Mobile support with taps and tilting.
 		- CVT behaves A LOT more realistically now.
 		
-	[Features] -Detomiks
+	[Features] -detocoyote
 		- Added cylinder wheels by changing some Initialize stuff... you can easily change back to ball wheels by setting the Shape property to "Ball" and setting all 3 sizes to be the same.
 		- Sway bar is now a spring constraint. It is now MUCH, MUCH, MUCH easier to tune properly. A tutorial on how to set it up might be coming soon...
 		- Gravity compensation because you people keep complaining about it...
 		- Individual disabling of steering in each wheel. Just add a boolean attribute in the wheel called "SteerDisabled". Thanks @MEGAHACKER2228 for the idea.
 		- Wheel weight instead of density.
 		
-	[Fixes] -Detomiks
+	[Fixes] -detocoyote
 		- RPM management improved:
 			- Revlimiter that changes the throttle.
 			- Removed idle throttle since idle is actually held with throttle now.
@@ -213,7 +201,7 @@
 		- Made axle structural member positions not garbage in code.
 		- Update system works with new update codes and is mostly future-proofed.
 	
-	[Plugins] -Detomiks
+	[Plugins] -detocoyote
 		- Renamed many plugins to be more user-friendly and fit with the possibly new naming scheme?
 		- Removed many plugins to reduce bloat. Most have been migrated directly into the drive.
 		- Added new sounds module to go with the new calculations.
@@ -312,10 +300,10 @@
 		- Tune reorganized
 
 [07/09/2020 : A-Chassis C Version 1.4, Update 4] - The Burnout Update
-	[Welding Bugfix] -Avxnturador and LuaInt
+	[Welding Bugfix] -pointclouded and LuaInt
 		- Fixed a parenting issue in the Initialize script regarding welds, making client and server replication break.
 		
-	[Parking Brake Bias] -Avxnturador
+	[Parking Brake Bias] -pointclouded
 		- Added Parking Brake Bias, works like regular Brake Bias
 		
 	[Four Wheel Steering Update] -LuaInt
@@ -327,17 +315,17 @@
 		- Also fixes a bug where all 4 wheels have the parking brake applied
 
 [06/14/2020 : A-Chassis C Version 1.4, Updates 1 and 2] - The Movement Update
-	[Pertaining to Update 2] -LuaInt and Avxnturador
+	[Pertaining to Update 2] -LuaInt and pointclouded
 		- Separated Front and Rear Steering gyro options (Added Tune.RSteerD, Tune.RSteerMaxTorque and Tune.RSteerP)
 		- Added rear wheel steering to "R" wheels
 			Please add Tune.RSteerD, Tune.RSteerMaxTorque and Tune.RSteerP to the tune to take advantage of separated gryo options
 
-	(Personal Note by Avxnturador)
+	(Personal Note by pointclouded)
 		This update would not have been as big of an update without LuaInt
 		With that said, LuaInt is now the newest member to the AC6 and NCT chassis team.
 		Thank him endlessly.
 		
-	[New Engine] -Avxnturador 
+	[New Engine] -pointclouded 
 		- Combining AC6C V1.2's engines alongside AC6C V1.3's aspiration, the engine now has its final revision
 		- Instructions to tune it are now similar to both previous versions of the chassis', and a new Desmos graph reflects it
 	
@@ -345,7 +333,7 @@
 		- The chassis now uses PGS Physics Solver Components to replace the legacy BodyMovers
 		- Different Power and Brake motors are now implemented, bringing a more realistic driving experience
 		
-	[Rev Limiter] -Avxnturador
+	[Rev Limiter] -pointclouded
 		- Limits the RPM to a certain set RPM
 		- Can be limited in Neutral gear or when the clutch is in
 	
@@ -370,21 +358,21 @@
 		- Braking has been combined, alongside with brake bias
 		- Engine braking has also been introduced
 	
-	[Suspension Geometry Separation] -Avxnturador
+	[Suspension Geometry Separation] -pointclouded
 		- The suspension geometry (the wishbone and spring) can now be separated
 		- This is done with the new Spring Offset values
 		- This will move the spring offset IN RELATION TO THE ANCHOR OFFSET
 
-	[Weight Optimization] -Avxnturador
+	[Weight Optimization] -pointclouded
 		- Objects with the Massless property enabled will be ignored when calculating weight
 		- This is insanely helpful for highly detailed cars where the cars' mass would reach excess of 1000 or so
 
-	[Others] -Avxnturador
+	[Others] -pointclouded
 		- Revamped the Auto Update feature to be better alongside the new model
 		- Removed the Drag feature, allowing third-party plugins to handle that force by itself
 		- Added RCaster for four wheel steering enabled cars 
 	
-	[Legacy Physics Deprecated] -LuaInt and Avxnturador
+	[Legacy Physics Deprecated] -LuaInt and pointclouded
 		- With the release of this new chassis, Legacy physics engine support has been completely deprecated
 		
 [09/18/2019 : A-Chassis C Version 1.3, Update 1] - The Engine Update
@@ -434,7 +422,7 @@
 		-After having a very rough start and notoriety, a newer clutch system has been added. 
 		-Torque should now be fixed, tune revision from previous versions highly recommended.
 		-Special thanks to IMeanBiz, the creator of the newly-revised clutch.
-			Note: PLEASE DO NOT SEND TRANSMISSION QUESTIONS TO HIM! Send them to Avxnturador instead.
+			Note: PLEASE DO NOT SEND TRANSMISSION QUESTIONS TO HIM! Send them to pointclouded instead.
 		-Tune.Clutch has been added, disabling it makes the chassis act like AC6.81T (no realistic clutch).
 		-Tune.ClutchMode has been added, changes if RPM will influence the clutch or not.
 	
@@ -777,4 +765,4 @@
 --]]
 -- yes, it is completely necessary to include the logs from 2016
 
-return "1.7"
+return "1.7.2"
