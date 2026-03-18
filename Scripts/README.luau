@@ -35,7 +35,7 @@
 		- Remove and use a third-party plugin to fix
 		
 -- Changelog [MM/DD/YYYY]
-[03/15/2026 : A-Chassis, Version 1.7.2] - Under The Hood 
+[03/18/2026 : A-Chassis, Version 1.7.2] - Under The Hood 
 	[Features]
 		- Live Wheel and Steering updates													(Some wheel and steering variables now recalculate during runtime if wheel size or attributes change)
 		- Added SteerDisabled attribute to all wheels										(Allows for individual steering toggles per wheel during runtime)
@@ -51,10 +51,16 @@
 		- Moved brake calculations to runtime to allow plugins to change brake values live
 		- Removed redundant VirtualInputEnabled check and unused variables
 		- General code cleanup for better readability
+		- Fixed gravcomp force application point being wrong
+		- Fixed bike steering not working when suspension is disabled
+		- Added some compatibility with car plugins to bike chassis
+		- Fixed bike's weird behaviour on exit, the steer instance was not being disabled
 		
 	[Plugins]
 		- Fixed server-side sounds failing to play for others after exiting and re-entering the car
 		- Updated Tires plugin to reduce errors during vehicle destruction (Special thanks to ProfessorSr)
+		- Updated the majority of the bike chassis plugins to match car plugins latest versions
+		- Fixed most bike plugins breaking on exit (such as animations)
 
 [06/14/2025 : A-Chassis, Version 1.7.1] - Bug Fixing and Optimization
 	[Features]
