@@ -536,21 +536,22 @@ local function DealWithInput(input: InputObject, gameProcessed: boolean)
 		if input.UserInputType and input.UserInputType.Name:find("Gamepad") then
 			-- Gamepad Steering
 			if input.KeyCode == _CTRL["ContlrSteer"] then
-				local cDZone = math.min(.99,_Tune.Peripherals.ControlLDZone/100)
-				if input.Position.X>= 0 then
-					if math.abs(input.Position.X)>cDZone then
-						_GSteerT = (input.Position.X-cDZone)/(1-cDZone)
+				if input.Position.X >= 0 then
+					local cDZone = math.min(0.99, _Tune.Peripherals.ControlRDZone / 100)
+					if math.abs(input.Position.X) > cDZone then
+						_GSteerT = (input.Position.X - cDZone) / (1 - cDZone)
 					else
 						_GSteerT = 0
 					end
 				else
-					if math.abs(input.Position.X)>cDZone then
-						_GSteerT = (input.Position.X+cDZone)/(1-cDZone)
+					local cDZone = math.min(0.99, _Tune.Peripherals.ControlLDZone / 100)
+					if math.abs(input.Position.X) > cDZone then
+						_GSteerT = (input.Position.X + cDZone) / (1 - cDZone)
 					else
 						_GSteerT = 0
 					end
 				end
-
+				
 				-- Gamepad Throttle
 			elseif input.KeyCode == _CTRL["ContlrThrottle"] then
 				_IThrot = math.max(0,input.Position.Z)
