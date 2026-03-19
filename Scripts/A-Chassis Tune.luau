@@ -19,21 +19,21 @@ local Tune = {}
 
 --[[Wheel Alignment]]
 	--[Values are in degrees]
-	Tune.FCamber		= -0.6
-	Tune.RCamber		= -0.9
-	Tune.FCaster		= 4
+	Tune.FCamber		= 0
+	Tune.RCamber		= 0
+	Tune.FCaster		= 0
 	Tune.RCaster		= 0
 	Tune.FToe			= 0
 	Tune.RToe			= 0
 
 --[[Weight and CG]]
-	Tune.Weight			= 1379		-- Total weight (in kilograms, under Earth's gravity, including wheel and suspension weight)
+	Tune.Weight			= 1440		-- Total weight (in kilograms, under Earth's gravity, including wheel and suspension weight)
 	Tune.WeightBSize	= {			-- Size of weight brick in milimeters. You can find how to convert studs to milimeters inside the Units module.
-		--[[Width]]			1802	,
-		--[[Height]]		1408	,
-		--[[Length]]		4551	}
-	Tune.WeightDist		= 50		-- Weight distribution (0 - on rear wheels, 100 - on front wheels, can be <0 or >100)
-	Tune.CGHeight		= .1		-- Center of gravity height (studs relative to average of all wheels)
+		--[[Width]]			1900	,
+		--[[Height]]		1303	,
+		--[[Length]]		4545	}
+	Tune.WeightDist		= 44		-- Weight distribution (0 - on rear wheels, 100 - on front wheels, can be <0 or >100)
+	Tune.CGHeight		= 0.12		-- Center of gravity height (studs relative to average of all wheels)
 	Tune.WBVisible		= false		-- Makes the weight brick visible
 	
 	Tune.GravComp		= 35		-- Desired gravitational force in Roblox units. (35 is the default. Set to 0 to use workspace.Gravity instead)
@@ -43,42 +43,42 @@ local Tune = {}
 	Tune.RWheelWeight	= 23		-- Rear Wheel Weight in kg
  
 	Tune.AxleSize		= 1.5		-- Size of structural members (larger = MORE STABLE / carry more weight)
-	Tune.AxleDensity	= .1		-- Density of structural members
+	Tune.AxleDensity	= 0.1		-- Density of structural members
 	Tune.CustomSuspensionDensity	= 1	-- Density of suspension joints, only applies to custom suspension. (0 makes them massless)
 
 --[[Suspension]]
 	Tune.SuspensionEnabled	= true	-- Enables suspension, true or false
 	
 	--Front Strut
-	Tune.FSusStiffness	= 12.3		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
+	Tune.FSusStiffness	= 10		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
 	Tune.FSusDamping	= 3.9		-- Spring Damping in thousands of kg/s. (To convert from Roblox damping, divide Roblox damping by 45.6)
 	Tune.FSwayBar		= 3.2		-- Sway Bar Force in kgf/mm (more = less roll)
 
-	Tune.FSusLength		= 1.2		-- Base spring height (in studs)
-	Tune.FPreCompress	= .2		-- Adds to base spring height (in studs)
-	Tune.FExtensionLim	= .5		-- Max Extension Travel (in studs)
-	Tune.FCompressLim	= .3		-- Max Compression Travel (in studs)
+	Tune.FSusLength		= 1.35		-- Base spring height (in studs)
+	Tune.FPreCompress	= 0.2		-- Adds to base spring height (in studs)
+	Tune.FExtensionLim	= 0.5		-- Max Extension Travel (in studs)
+	Tune.FCompressLim	= 0.3		-- Max Compression Travel (in studs)
 
 	--Rear Strut
-	Tune.RSusStiffness	= 13.2		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
+	Tune.RSusStiffness	= 11		-- Spring Force in kgf/mm. (To convert from Roblox stiffness, divide Roblox stiffness by 447.18324)
 	Tune.RSusDamping	= 4.4 		-- Spring Damping in thousands of kg/s. (To convert from Roblox damping, divide Roblox damping by 45.6)
 	Tune.RSwayBar		= 1.1		-- Sway Bar Force in kgf/mm (more = less roll)
 	
-	Tune.RSusLength		= 1.2		-- Base spring height (in studs)
-	Tune.RPreCompress	= .2		-- Adds to base spring height (in studs)
-	Tune.RExtensionLim	= .5		-- Max Extension Travel (in studs)
-	Tune.RCompressLim	= .3		-- Max Compression Travel (in studs)
+	Tune.RSusLength		= 1.35		-- Base spring height (in studs)
+	Tune.RPreCompress	= 0.2		-- Adds to base spring height (in studs)
+	Tune.RExtensionLim	= 0.5		-- Max Extension Travel (in studs)
+	Tune.RCompressLim	= 0.3		-- Max Compression Travel (in studs)
 
 	--Old Suspension Settings, applies if there is no SuspensionGeometry for the respective wheel
 	Tune.FSusAngle		= 80		-- Spring Angle (degrees from horizontal)
 	Tune.FWsBoneLen		= 4			-- Wishbone Length
 	Tune.FWsBoneAngle	= 0			-- Wishbone angle (degrees from horizontal)
 	Tune.FAnchorOffset	= {			-- Suspension anchor point offset (relative to center of wheel)
-		--[[Lateral]]		-.4		,	-- positive = outward
-		--[[Vertical]]		-.5		,	-- positive = upward
+		--[[Lateral]]		-0.4		,	-- positive = outward
+		--[[Vertical]]		-0.5		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 	Tune.FSpringOffset	= {			-- Suspension anchor point offset (relative to ABOVE anchor offset) (Avxnturador)
-		--[[Lateral]]		-.4		,	-- positive = outward 
+		--[[Lateral]]		-0.4		,	-- positive = outward 
 		--[[Vertical]]		0		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 
@@ -86,19 +86,19 @@ local Tune = {}
 	Tune.RWsBoneLen		= 4			-- Wishbone Length
 	Tune.RWsBoneAngle	= 0			-- Wishbone angle (degrees from horizontal)
 	Tune.RAnchorOffset	= {			-- Suspension anchor point offset (relative to center of wheel)
-		--[[Lateral]]		-.4		,	-- positive = outward
-		--[[Vertical]]		-.5		,	-- positive = upward
+		--[[Lateral]]		-0.4		,	-- positive = outward
+		--[[Vertical]]		-0.5		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 	Tune.RSpringOffset	= {			-- Suspension anchor point offset (relative to ABOVE anchor offset) (Avxnturador)
-		--[[Lateral]]		-.4		,	-- positive = outward 
+		--[[Lateral]]		-0.4		,	-- positive = outward 
 		--[[Vertical]]		0		,	-- positive = upward
 		--[[Forward]]		0		}	-- positive = forward
 
 	--Aesthetics	
-	Tune.SusVisible		= false			-- Suspension Visible
+	Tune.SusVisible		= true			-- Suspension Visible
 	Tune.SpringsVisible	= true			-- Springs Visible
-	Tune.SusRadius		= .2			-- Spring Coil Radius
-	Tune.SusThickness	= .1			-- Spring Coil Thickness
+	Tune.SusRadius		= 0.2			-- Spring Coil Radius
+	Tune.SusThickness	= 0.1			-- Spring Coil Thickness
 	Tune.SusColor		= "Bright red"	-- Spring Color [BrickColor]
 	Tune.SusCoilCount	= 6				-- Spring Coil Count
 	
@@ -107,7 +107,7 @@ local Tune = {}
 	Tune.SteeringType		= "Auto"		-- This can be "Auto" or "Manual".
 	
 	-- "Auto" Steering type somewhat realistically calculates steering angle for you
-	Tune.SteerRatio			= 15/1		-- Steering ratio of your steering rack, google it for your car
+	Tune.SteerRatio			= 18/1		-- Steering ratio of your steering rack, google it for your car
 	Tune.LockToLock			= 2.6		-- Number of turns of the steering wheel lock to lock, google it for your car
 	Tune.Ackerman			= 1.1		-- If you don't know what it is don't touch it, ranges from .7 to 1.2
 	
@@ -137,10 +137,10 @@ local Tune = {}
 
 	-- Four Wheel Steering
 	Tune.FWSteer			= "None"	-- Static, Speed, Both, or None
-	Tune.RSteerOuter		= 10		-- Outer rear wheel steering angle (in degrees)
-	Tune.RSteerInner		= 10		-- Inner rear wheel steering angle (in degrees)
-	Tune.RSteerSpeed		= 60		-- Speed at which 4WS fully activates (Speed), deactivates (Static), or transition begins (Both) (km/h)
-	Tune.RSteerDecay		= 330		-- Speed of gradient cutoff (in km/h)
+	Tune.RSteerOuter		= 2.2		-- Outer rear wheel steering angle (in degrees)
+	Tune.RSteerInner		= 1.6		-- Inner rear wheel steering angle (in degrees)
+	Tune.RSteerSpeed		= 80		-- Speed at which 4WS fully activates (Speed), deactivates (Static), or transition begins (Both) (km/h)
+	Tune.RSteerDecay		= 150		-- Speed of gradient cutoff (in km/h)
 	
 	Tune.RSteerD				= 1000		-- Rear Steering Damping (old only)
 	Tune.RSteerP				= 50000		-- Rear Steering Aggressiveness (old only)
@@ -166,24 +166,24 @@ local Tune = {}
 	-- Naturally Aspirated Engine
 	Tune.Engine 		= true		
 
-		Tune.PeakTorque				= 209		-- The maximum amount of torque the engine makes in lb-ft.
-		Tune.PeakTorqueRPM			= 4480		-- When the engine reaches PeakTorque in RPM.
+		Tune.PeakTorque				= 390		-- The maximum amount of torque the engine makes in lb-ft.
+		Tune.PeakTorqueRPM			= 2500		-- When the engine reaches PeakTorque in RPM.
 
 		Tune.IdleRPM				= 1000		-- The engine's desired idle RPM. IdleDamping may change this.
-		Tune.IdleTorque				= 148		-- How much torque the engine makes at idle.
-		Tune.IdleTorqueCurve		= 0.5		-- The shape of the torque curve between idle and PeakRPM.
+		Tune.IdleTorque				= 315		-- How much torque the engine makes at idle.
+		Tune.IdleTorqueCurve		= 0.275		-- The shape of the torque curve between idle and PeakRPM.
 
-		Tune.Redline				= 8400		-- The maximum RPM.
-		Tune.RedlineTorque			= 142		-- How much torque the engine makes at redline.
-		Tune.RedlineTorqueCurve		= 0.6		-- The shape of the torque curve between PeakRPM and redline.
+		Tune.Redline				= 7500		-- The maximum RPM.
+		Tune.RedlineTorque			= 160		-- How much torque the engine makes at redline.
+		Tune.RedlineTorqueCurve		= 0.31		-- The shape of the torque curve between PeakRPM and redline.
 		
-		Tune.ShiftRPM				= 7700		-- This is when the engine shifts.
+		Tune.ShiftRPM				= 7000		-- This is when the engine shifts.
 		Tune.PeakRPM				= Tune.ShiftRPM		-- This is deprecated, only used for plugin compatibility.
 
-		Tune.VVLTorque				= 22		-- Variable Valve Lift (VVL, aka VTEC)'s amount of torque. Set this to 0 to turn off.
-		Tune.VVLRPM					= 6000		-- When VVL activates in RPM.
-		Tune.VVLTime				= 500		-- How long it takes for VVL to activate in RPM.
-		Tune.VVLCurve				= 0.002		-- The shape of the curve during VVL activation.
+		Tune.VVLTorque				= 0			-- Variable Valve Lift (VVL, aka VTEC)'s amount of torque. Set this to 0 to turn off.
+		Tune.VVLRPM					= 3000		-- When VVL activates in RPM.
+		Tune.VVLTime				= 1000		-- How long it takes for VVL to activate in RPM.
+		Tune.VVLCurve				= 0.1		-- The shape of the curve during VVL activation.
 
 		Tune.HPLimit				= 0			-- The horsepower limit of the engine (set to 0 to turn off).
 
@@ -201,17 +201,17 @@ local Tune = {}
 	-- Turbocharger
 	Tune.Turbochargers	= 2				-- Number of turbochargers in the engine, set to 0 for no turbochargers
 
-		Tune.T_Boost			= 8.7		-- The maximum amount of boost of one turbocharger in PSI.
-		Tune.T_PeakRPM			= 5020		-- When the turbo reaches maximum boost.
+		Tune.T_Boost			= 10		-- The maximum amount of boost of one turbocharger in PSI.
+		Tune.T_PeakRPM			= 2500		-- When the turbo reaches maximum boost.
 
-		Tune.T_IdleBoost		= 1.2		-- How much boost is made at idle.
-		Tune.T_Curve			= 0.2		-- The shape of the boost curve between idle and PeakRPM.
+		Tune.T_IdleBoost		= 0			-- How much boost is made at idle.
+		Tune.T_Curve			= 0.91		-- The shape of the boost curve between idle and PeakRPM.
 		
-		Tune.T_Efficiency		= 5			-- How much torque is made with 1 PSI.
+		Tune.T_Efficiency		= 10		-- How much torque is made with 1 PSI.
 		
-		Tune.T_Size				= 9.1		-- Turbo size, larger = less boost from horsepower
-		Tune.T_SpoolIncrease	= .06		-- Throttle response of the turbo. (Higher = more responsive, ranges from 0 to 1)
-		Tune.T_SpoolDecrease	= .03		-- Throttle response of the turbo. (Higher = more responsive, ranges from 0 to 1)
+		Tune.T_Size				= 11		-- Turbo size, larger = less boost from horsepower
+		Tune.T_SpoolIncrease	= 0.3		-- Throttle response of the turbo. (Higher = more responsive, ranges from 0 to 1)
+		Tune.T_SpoolDecrease	= 0.06		-- Throttle response of the turbo. (Higher = more responsive, ranges from 0 to 1)
 
 	-- Supercharger
 	Tune.Superchargers	= 0			-- Number of superchargers in the engine, Set to 0 for no superchargers
@@ -227,7 +227,7 @@ local Tune = {}
 
 		Tune.S_Efficiency		= 4.34		-- How much torque is made with 1 PSI.
 
-		Tune.S_Response			= .1		-- Throttle response of the supercharger. (Higher = more responsive, ranges from 0 to 1)
+		Tune.S_Response			= 0.1		-- Throttle response of the supercharger. (Higher = more responsive, ranges from 0 to 1)
 
 
 	-- Ignition
@@ -261,7 +261,7 @@ local Tune = {}
 	
 --[[Drivetrain]]	
 	Tune.Config			= "AWD"		-- "FWD" , "RWD" , "AWD"
-	Tune.TorqueVector	= .2			-- AWD ONLY, "-1" has a 100% front bias, "0" has a 50:50 bias, and "1" has a 100% rear bias. Can be any number between that range.
+	Tune.TorqueVector	= 0.2			-- AWD ONLY, "-1" has a 100% front bias, "0" has a 50:50 bias, and "1" has a 100% rear bias. Can be any number between that range.
 
 	-- Options for a limited slip differential (LuaInt)
 	-- *You can set all of these values to 0 to achieve an open differential.
@@ -318,7 +318,7 @@ local Tune = {}
 	Tune.SpeedEngage 	= 40		-- Speed the clutch fully engages at (Based on km/h)
 
 	--Clutch: "Old" mode
-	Tune.ClutchRPMMult	= 1.0		-- Clutch RPM multiplier, recommended to leave at 1.0
+	Tune.ClutchRPMMult	= 1			-- Clutch RPM multiplier, recommended to leave at 1.0
 
 	--Torque Converter:
 	Tune.TQLock 		= false		-- Torque converter starts locking at a certain RPM
