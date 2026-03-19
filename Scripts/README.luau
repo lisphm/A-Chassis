@@ -35,10 +35,11 @@
 		- Remove and use a third-party plugin to fix
 		
 -- Changelog [MM/DD/YYYY]
-[03/18/2026 : A-Chassis, Version 1.7.2] - Under The Hood 
+[03/19/2026 : A-Chassis, Version 1.7.2] - Under The Hood 
 	[Features]
 		- Live Wheel and Steering updates													(Some wheel and steering variables now recalculate during runtime if wheel size or attributes change)
 		- Added SteerDisabled attribute to all wheels										(Allows for individual steering toggles per wheel during runtime)
+		- Added A-Chassis tag to model for future plugin developers
 		
 	[Fixes]												
 		- Remade the double wishbone suspension and simplified it for beginners learning how it works
@@ -47,7 +48,7 @@
 		- Manually destroy the SuspensionGeometry model when custom suspension is disabled to prevent leftovers
 		- Fixed chat input bug where typing would trigger car functions (a roblox update broke this)
 		- Locked update rate to 60Hz to make the math more consistent for people with high FPS
-		- Changed cached value instances into a table to avoid registry limit issues
+		- Moved cached value instances into a table to avoid registry limit issues
 		- Moved brake calculations to runtime to allow plugins to change brake values live
 		- Removed redundant VirtualInputEnabled check and unused variables
 		- General code cleanup for better readability
@@ -55,12 +56,14 @@
 		- Fixed bike steering not working when suspension is disabled
 		- Added some compatibility with car plugins to bike chassis
 		- Fixed bike's weird behaviour on exit, the steer instance was not being disabled
+		- Fixed bike's weird behaviour when moved before a player sits on it
 		
 	[Plugins]
 		- Fixed server-side sounds failing to play for others after exiting and re-entering the car
 		- Updated Tires plugin to reduce errors during vehicle destruction (Special thanks to ProfessorSr)
 		- Updated the majority of the bike chassis plugins to match car plugins latest versions
 		- Fixed most bike plugins breaking on exit (such as animations)
+		- Fixed bike stand not being enabled when spawned in
 
 [06/14/2025 : A-Chassis, Version 1.7.1] - Bug Fixing and Optimization
 	[Features]
