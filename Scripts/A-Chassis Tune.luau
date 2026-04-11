@@ -19,8 +19,8 @@ local Tune = {}
 
 --[[Wheel Alignment]]
 	--[Values are in degrees]
-	Tune.FCamber		= 0
-	Tune.RCamber		= 0
+	Tune.FCamber		= -0.5
+	Tune.RCamber		= -0.5
 	Tune.FCaster		= 0
 	Tune.RCaster		= 0
 	Tune.FToe			= 0
