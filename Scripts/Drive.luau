@@ -829,22 +829,21 @@ local function Auto()
 end
 
 local function Gear()
-	local fFD = _Tune.FinalDrive * _Tune.FDMult
-	local fFDr = fFD * 30 / math.pi
-
+	local fFDr = (_Tune.FinalDrive * _Tune.FDMult) * 30 / math.pi
+	
 	if _ShiftUp and not _Shifting then
-		if (_TMode == "Manual" and not _ClPressing) or (_TMode == "Manual" and _Tune.ClutchRel and (_InThrot>0)) or _CGear == #_Tune.Ratios-2-ParkingGearOffset or (_TMode ~= "Manual" and not _IsOn) then 
+		if (_TMode == "Manual" and not _ClPressing) or (_TMode == "Manual" and _Tune.ClutchRel and (_InThrot > 0)) or _CGear == #_Tune.Ratios - 2 - ParkingGearOffset or (_TMode ~= "Manual" and not _IsOn) then 
 			_ShiftUp = false 
 			return 
 		end
-		local NextGear = math.min(_CGear+3+ParkingGearOffset,#_Tune.Ratios)
-		if _TMode~="Manual" and _Tune.ClutchType ~= "CVT" then
+		local NextGear = math.min(_CGear + 3 + ParkingGearOffset, #_Tune.Ratios)
+		if _TMode ~= "Manual" and _Tune.ClutchType ~= "CVT" then
 			_Shifting = true
-			if _CGear>0 then 
-				if _Tune.AutoShiftType=="DCT" then 
+			if _CGear > 0 then 
+				if _Tune.AutoShiftType == "DCT" then 
 					task.wait(_Tune.ShiftUpTime)
-				elseif _Tune.AutoShiftType=="Rev" then
-					repeat task.wait() until _RPM<=math.max(math.min(_MaxWheelSpin*_Tune.Ratios[NextGear]*fFDr,_Tune.Redline-_Tune.RevBounce),_Tune.IdleRPM) or not _IsOn or _ShiftDn 
+				elseif _Tune.AutoShiftType == "Rev" then
+					repeat task.wait() until _RPM <= math.max(math.min(_MaxWheelSpin * _Tune.Ratios[NextGear] * fFDr, _Tune.Redline - _Tune.RevBounce), _Tune.IdleRPM) or not _IsOn or _ShiftDn 
 				end
 			end
 		end
@@ -853,25 +852,26 @@ local function Gear()
 		if _TMode ~= "Manual" and not _IsOn then 
 			return 
 		end
-		if NextGear > 3+ParkingGearOffset and _Tune.ClutchType == "CVT" then return end  -- make sure it cannot go past 1st gear
-		_CGear = math.min(_CGear+1,#_Tune.Ratios-2-ParkingGearOffset)
-		if _TMode ~= "Manual" or (_TMode == "Manual" and _CGear == 1) and _IsOn then 
-			_ClPressing = false 
+		if NextGear > 3 + ParkingGearOffset and _Tune.ClutchType == "CVT" then return end
+		_CGear = math.min(_CGear + 1, #_Tune.Ratios - 2 - ParkingGearOffset)
+		if _TMode ~= "Manual" or (_CGear == 1 and _IsOn) then 
+			_ClPressing = (_TMode == "Manual" and _PlayerClutch) or false
 		end
 	end
+
 	if _ShiftDn and not _Shifting then
-		if (_TMode == "Manual" and not _ClPressing) or _CGear == -1-ParkingGearOffset or (_TMode ~= "Manual" and not _IsOn) then 
+		if (_TMode == "Manual" and not _ClPressing) or _CGear == -1 - ParkingGearOffset or (_TMode ~= "Manual" and not _IsOn) then 
 			_ShiftDn = false 
 			return 
 		end
-		local PrevGear = math.min(_CGear+1+ParkingGearOffset,#_Tune.Ratios)
-		if _TMode~="Manual" then
+		local PrevGear = math.min(_CGear + 1 + ParkingGearOffset, #_Tune.Ratios)
+		if _TMode ~= "Manual" then
 			_Shifting = true
-			if _CGear>1 then 
-				if _Tune.AutoShiftType=="DCT" then 
+			if _CGear > 1 then 
+				if _Tune.AutoShiftType == "DCT" then 
 					task.wait(_Tune.ShiftDnTime)
-				elseif _Tune.AutoShiftType=="Rev" then
-					repeat task.wait() until _RPM>=math.max(math.min(_MaxWheelSpin*_Tune.Ratios[PrevGear]*fFDr,_Tune.Redline-_Tune.RevBounce),_Tune.IdleRPM) or not _IsOn or _ShiftUp
+				elseif _Tune.AutoShiftType == "Rev" then
+					repeat task.wait() until _RPM >= math.max(math.min(_MaxWheelSpin * _Tune.Ratios[PrevGear] * fFDr, _Tune.Redline - _Tune.RevBounce), _Tune.IdleRPM) or not _IsOn or _ShiftUp
 				end
 			end
 		end
@@ -880,9 +880,9 @@ local function Gear()
 		if _TMode ~= "Manual" and not _IsOn then 
 			return 
 		end
-		_CGear = math.max(_CGear-1,_Velocity.Magnitude>5 and -1 or -2)
-		if _TMode ~= "Manual" or (_TMode == "Manual" and _CGear == -1) and _IsOn then 
-			_ClPressing = false 
+		_CGear = math.max(_CGear - 1, _Velocity.Magnitude > 5 and -1 or -2)
+		if _TMode ~= "Manual" or (_CGear == -1 and _IsOn) then 
+			_ClPressing = (_TMode == "Manual" and _PlayerClutch) or false
 		end
 	end
 end
@@ -1015,7 +1015,7 @@ local function Engine(dt: number)
 	end
 
 	-- Clutch
-	if _Shifting or (_CGear == 0 or (ParkingGearEnabled and _CGear == -2)) then
+	if _Shifting or (_AutoClutch and (_CGear == 0 or (ParkingGearEnabled and _CGear == -2))) then
 		_ClPressing = true
 		_Clutch = 1
 		stallOk = false
