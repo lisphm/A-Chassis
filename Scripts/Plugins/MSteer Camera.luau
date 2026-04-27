@@ -22,18 +22,38 @@ local frame = script.Parent
 local car = frame.Parent.Car.Value :: Model
 local values = frame.Parent.Values :: Folder
 local seat = car.DriveSeat :: VehicleSeat
+local wheels = car.Wheels:GetChildren() :: { BasePart }
 
 local valuesMouseSteerOn = values.MouseSteerOn :: BoolValue
 local valuesVelocity = values.Velocity :: Vector3Value
-local valuesCenter = values.Center :: CFrameValue
 
 local RENDER_STEPPED_BIND_NAME = "MCam"
 local RENDER_STEPPED_BIND_PRIORITY = Enum.RenderPriority.Camera.Value
 
 -- Functions
+local function GetCenter()
+	local centerF = Vector3.new()
+	local centerR = Vector3.new()
+	local countF = 0
+	local countR = 0
+	for i, wheel in wheels do
+		if string.find(wheel.Name, "F") then
+			centerF = centerF + wheel.Position
+			countF = countF + 1
+		else
+			centerR = centerR + wheel.Position
+			countR = countR + 1
+		end
+	end
+	centerF = centerF / countF
+	centerR = centerR / countR
+	local center = CFrame.lookAt(centerR:Lerp(centerF, 0.5), centerF)
+	return center
+end
+
 local function onUpdate()
 	local velocity = valuesVelocity.Value
-	local center = valuesCenter.Value
+	local center = GetCenter()
 	
 	local pspeed = math.min(1, velocity.Magnitude / 500)
 	local cc = center.Position + Vector3.new(0, 8 + (pspeed * 2), 0) - (center.LookVector * 17) + (velocity.Unit * -7 * pspeed)
