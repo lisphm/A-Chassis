@@ -499,7 +499,7 @@ local function DealWithInput(input: InputObject, gameProcessed: boolean)
 			-- Toggle Mouse Controls
 		elseif input.KeyCode ==_CTRL["ToggleMouseDrive"] then
 			if input.UserInputState == Enum.UserInputState.End then
-				_MSteer = not _MSteer
+				MouseSteerValue.Value = not _MSteer
 				_IThrot = 0
 				_IBrake = 0
 				_GSteerT = 0
